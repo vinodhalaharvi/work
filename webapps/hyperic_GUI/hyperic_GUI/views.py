@@ -1,0 +1,110 @@
+#!/usr/bin/python
+#===============================================================================
+# Script provided by Vinod Halaharvi ( vinod.halaharvi@rtpnet.net, vinod.halaharvi@gmail.com )
+# RTP Network Services, Inc. / 904-236-6993 ( http://www.rtpnet.net )
+# DESCRIPTION: 
+#===============================================================================
+import  sys
+from rtputils.hyperic.cli.funcs import *
+from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
+formpostattr = 'hidden'
+from django.shortcuts import redirect
+
+_loginstr= r'''<div class="form">
+  <form action="" method="POST">
+    <fieldset align="center">
+      <legend >Login, Fields marked * are Necessary:</legend>
+      <labelfor="username">*Username:</label>
+      <input type="text" name="username" id="username" />
+      <br />
+      <label for="password">*Password:</label>
+      <input type="password" name="password" id="password" />
+      <br />
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+	</div>
+'''
+
+_logoutstr = r'''
+	<div align=center><form action="/logout"><input type="submit" name="submit" value="logout" /></form><a href="/">Log back in</a></div>
+'''
+
+def logout(request):
+  try:
+    del request.session['user_id']
+    del request.session['logged_in']
+  except:
+    pass
+  return redirect(index) 
+
+
+def login(request, user):
+  request.session['user_id'] = user.id
+  request.session['logged_in'] = True
+  return initialpage(request)
+
+  
+def initialpage(request):
+  t = request.REQUEST.copy()
+  return render_to_response('index.html', {} , mimetype='text/html') 
+
+def todict(dct):
+  temp = {}
+  for key,value in dct.items():
+    if isinstance(value, list):
+      value = value[0]
+    else:
+      value = value
+    temp.update({str(key):str(value)})
+  return temp 
+ 
+
+@csrf_exempt
+def applogic (request):
+  if request.method == 'GET' and 'actionName' not in request.GET:
+    input = request.GET['searchValue']
+    if input:
+      (type, obj) = check_dict(input)
+      if type == 'justoutput':
+        return HttpResponse(html(obj), content_type="text/plain")
+      elif type == 'callfunction':
+        (rtype, rdata) = obj({})
+        response =  HttpResponse(rdata,  content_type=type)
+	return response
+  elif request.method == 'POST':
+    dct =  todict(request.POST.copy())
+    actionName=dct['actionName'] 
+    del dct['actionName']
+    (type, obj) = check_dict(actionName)
+    (rtype, rdata) = obj(dct)
+    print (rtype, rdata)
+    response =  HttpResponse(rdata,  content_type=rtype)
+    return response
+  else:
+    response =  HttpResponse("Error..",  content_type="text/plain")
+    return response
+    
+@csrf_exempt
+def index(request):
+  if 'logged_in' in request.session:
+    return initialpage(request)
+  elif request.method == 'POST':
+    user = authenticate(username=request.POST['username'], password=request.POST['password'])
+    request.user = user
+    if user:
+      if user.is_active:
+        return login(request, user)
+      else:
+        return HttpResponse('<strong>User not active</strong>', 'text/html')
+    else:
+      return HttpResponse('<strong>Invalid username and/or password</strong>', 'text/html')
+  elif request.method == 'GET':
+    return HttpResponse('<strong>%s</strong>' % _loginstr, 'text/html')

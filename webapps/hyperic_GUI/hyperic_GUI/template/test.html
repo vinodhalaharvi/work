@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Vinod Halaharvi</title>
+  <script type="text/javascript" language="javascript" src="resources/media/js/jquery.js"></script>
+  <style type="text/css" title="currentStyle">
+	  @import "resources/media/css/demo_page.css";
+	  @import "resources/media/css/jquery.dataTables.css";
+	</style>
+	<script type="text/javascript" language="javascript" src="resources/media/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+  //when a key is pressed
+
+  
+
+  
+  });  //end of document
+  </script>
+  </head>
+  <body>
+    <div id="inputdiv" align="center">
+      <input type="text" id="input" cols="30" rows="10" name="input/"><br>
+      <input type="button"  id="button" value="render Animation" />
+      <br />
+    </div>
+    <div id="outputdiv" align="left">
+    	<form id="target" ></form>
+    </div>
+        
+   <script type="text/javascript">
+   //when form is submitted
+  	$('form#target').submit(function(event){
+       $.ajax({
+       	url: 'tojson/',
+       	dataType: 'html',
+       	data: ($(this).serialize()),
+       	contentType: "application/x-www-form-urlencoded",
+       	context: 'document.body.outputdiv.target',
+       	async:false,
+       	type:'GET',
+       	success: function(data){
+       	   $('form#target').dataTables(data);
+       	  }, 
+       	error: function(data){
+    				$('error').html(data);
+       	},
+       	}); //ajax
+       	return false;
+  	}); //submit
+    
+   </script>
+   
+   <script type="text/javascript">
+   $('#button').click(function(){
+    $("#table").dataTable()
+  }); 
+   </script>
+  <br />
+  <br />
+  <br />
+  <div align="center">
+  	<form action="/logout"><input type="submit" name="submit" value="logout" /></form>
+  </div>
+  <div class="error"></div>
+  </body>
+</html>
