@@ -496,6 +496,22 @@ htmlmap = {
   </form>
 </div>
 '''
+,'metric_syncTemplates': r'''
+<div class="form" align="center">
+  <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden" />
+      <input type="hidden" name="actionName" value="metric_syncTemplates" />
+      <legend>Fields marked * are Necessary:</legend>
+      <br />
+      <label for="xml_to_sync">xml_to_sync*:</label>
+      <textarea cols="100" rows="30" name="xml_to_sync" id="xml_to_sync">$data</textarea>
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>
+'''
 , 'metric_getMetricTemplate': r'''
 <div class="form" align="center">
   <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
@@ -525,6 +541,19 @@ htmlmap = {
       <label for="enabled">enabled:</label>
       <input type="text" name="enabled" id="enabled" />
       <br />
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>
+'''
+, 'metric_syncMetrics': r'''
+<div class="form" align="center">
+  <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden" />
+      <input type="hidden" name="actionName" value="metric_syncMetrics" />
+      <legend>Fields marked * are Necessary:</legend>
       <input type="submit" name="submit" id="submit" />
       <br />
     </fieldset>

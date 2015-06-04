@@ -194,6 +194,11 @@ def metric_getTemplates(data):
     return ("text/html", htmlmapper('metric_getTemplates'))
   return ("application/xml", rest('metric', 'getTemplates', data))
 
+def metric_syncTemplates(data):
+  if not data:
+    return ("text/html", htmlmapper('metric_syncTemplates'))
+  return ("text/html", '%s' % rest('metric', 'syncTemplates', data['xml_to_sync'], 'post'))
+
 def metric_getMetricTemplate(data):
   if not data:
     return ("text/html", htmlmapper('metric_getMetricTemplate'))
@@ -203,6 +208,11 @@ def metric_getMetrics(data):
   if not data:
     return ("text/html", htmlmapper('metric_getMetrics'))
   return ("application/xml", rest('metric', 'getMetrics', data))
+
+def metric_syncMetrics(data):
+  if not data:
+    return ("text/html", htmlmapper('metric_syncMetrics'))
+  return ("text/html", '%s' % rest('metric', 'syncMetrics', data['xml_to_sync'], 'post'))
   
 def metric_getMetric(data):
   if not data:
@@ -457,8 +467,10 @@ dct = {
   'alertdefinition_listTypeDefinitions':alertdefinition_listTypeDefinitions,
   'alertdefinition_delete':alertdefinition_delete,
   'metric_getTemplates': metric_getTemplates,
+  'metric_syncTemplates': metric_syncTemplates,
   'metric_getMetricTemplate':metric_getMetricTemplate,
   'metric_getMetrics':metric_getMetrics,
+  'metric_syncMetrics':metric_syncMetrics,
   'metric_getMetric':metric_getMetric,
   'metric_getData':metric_getData,
   'metric_getGroupData':metric_getGroupData,
