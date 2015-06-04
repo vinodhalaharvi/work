@@ -7,35 +7,14 @@
 import  sys
 from rtputils.hyperic.cli.funcs import *
 from django.shortcuts import render_to_response
+from rtputils.hyperic.cli.htmlmap import loginstr
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-formpostattr = 'hidden'
 from django.shortcuts import redirect
-
-_loginstr= r'''<div class="form">
-  <form action="" method="POST">
-    <fieldset align="center">
-      <legend >Login, Fields marked * are Necessary:</legend>
-      <labelfor="username">*Username:</label>
-      <input type="text" name="username" id="username" />
-      <br />
-      <label for="password">*Password:</label>
-      <input type="password" name="password" id="password" />
-      <br />
-      <input type="submit" name="submit" id="submit" />
-      <br />
-    </fieldset>
-  </form>
-	</div>
-'''
-
-_logoutstr = r'''
-	<div align=center><form action="/logout"><input type="submit" name="submit" value="logout" /></form><a href="/">Log back in</a></div>
-'''
 
 def logout(request):
   try:
@@ -79,6 +58,9 @@ def applogic (request):
         (rtype, rdata) = obj({})
         response =  HttpResponse(rdata,  content_type=type)
 	return response
+    else:
+      response =  HttpResponse("",  content_type="text/plain")
+      return response
   elif request.method == 'POST':
     dct =  todict(request.POST.copy())
     actionName=dct['actionName'] 
@@ -107,4 +89,4 @@ def index(request):
     else:
       return HttpResponse('<strong>Invalid username and/or password</strong>', 'text/html')
   elif request.method == 'GET':
-    return HttpResponse('<strong>%s</strong>' % _loginstr, 'text/html')
+    return HttpResponse('<strong>%s</strong>' % loginstr, 'text/html')

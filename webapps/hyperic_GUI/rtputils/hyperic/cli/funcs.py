@@ -9,18 +9,32 @@
 #===============================================================================
 import  sys
 import re
-from rtputils.hyperic.cli.htmlmap import *
+#from rtputils.hyperic.cli.htmlmap import *
+from htmlmap import *
 import json
 import xml.dom.minidom
+import sys
+import subprocess
+import shlex
+import os
 
 
-       
+def run(command):
+	"""docstring for run"""
+	print "RUNNING COMMAND .. " 
+	print command
+	p = subprocess.Popen(shlex.split(command), 
+				stdin=subprocess.PIPE, stdout=subprocess.PIPE, 
+				stderr=subprocess.STDOUT, close_fds=True, 
+				env=os.environ)
+	(child_stdin, child_stdout_and_stderr) = (p.stdin, p.stdout)
+	return child_stdout_and_stderr
+
+
 def rest(controller='user', action='list', data={}, type='get', app="hqapi1"):
     import urllib
     import urllib2
     import base64
-    import os
-    import sys
     import re
     url = "http://localhost:7080/hqu/%s/%s/%s.hqu?" % ( app, controller, action)
     print 
@@ -59,6 +73,48 @@ def cgiFieldStorageToDict( fieldStorage):
       params[ key ] = fieldStorage[ key ].value
    return params
         
+def start_server(data):
+	"""docstring for start_server"""
+	if not data:
+		return ("text/html", htmlmapper('start_server'))
+	data =  run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh start'" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	return ("text/html", data)
+
+def stop_server(data):
+	"""docstring for stop_server"""
+	if not data:
+		return ("text/html", htmlmapper('stop_server'))
+	data =  run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh stop'" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	return ("text/html", data)
+
+def status_server(data):
+	"""docstring for status_server"""
+	if not data:
+		return ("text/html", htmlmapper('status_server'))
+	data =  run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh status'" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	return ("text/html", data)
+
+def restart_server(data):
+	"""docstring for restart_server"""
+	if not data:
+		return ("text/html", htmlmapper('restart_server'))
+	data =  run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh restart'" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	return ("text/html", data)
+
+def dump_server(data):
+	"""docstring for dump_server"""
+	if not data:
+		return ("text/html", htmlmapper('dump_server'))
+	data =  run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh dump'" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	return ("text/html", data)
+
+def get_server_config_file(data):
+	"""docstring for print_server_config_file"""
+	if not data:
+		return ("text/html", htmlmapper('get_server_config_file'))
+	data = run("sudo su - hyperic -c 'cat %s/conf/hq-server.conf'" %("/opt/local/software/hyperic/server-5.7.1-EE")).read()
+	return ("text/html", data)
+
 def user_list(data):
   return ("application/html", "<p></p><textarea style=\"width:100%\">" + rest('user', 'list', data) + "</textarea>")
 
@@ -378,6 +434,13 @@ def html(_string):
 
 
 dct = {
+  'start_server': start_server,
+  'stop_server': stop_server,
+  'restart_server': restart_server,
+  'dump_server': dump_server,
+  'status_server': status_server,
+  'get_server_config_file': get_server_config_file,
+
   'user_list': user_list,
   'user_changePassword': user_changePassword,
   'user_sync': user_sync ,

@@ -1,5 +1,83 @@
 htmlmap = {
-  'user_create':   r'''<div class="form" align="center">
+    'stop_server': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="stop_server" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'start_server': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="start_server" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'status_server': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="status_server" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'dump_server': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="dump_server" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'restart_server': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="restart_server" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'get_server_config_file': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="get_server_config_file" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+   , 'user_create':   r'''<div class="form" align="center">
   <form id="target" action="false" method="POST" align="center">
     <fieldset align="right" style="width: 40%;">
       <input type="hidden" name="hidden" value="hidden"/>
@@ -1104,6 +1182,45 @@ htmlmap = {
 </div>'''
 }
 
+loginstr= r'''
+<!DOCTYPE HTML>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#login {
+			  left: 0;
+			  margin: auto;
+			  margin-top: 200px;
+			  top: 70%;
+			  width: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="login">
+			<div class="form">
+			  <form action="" method="POST">
+			    <fieldset align="center">
+			      <img src="resources/media/images/Hyperic_Search.jpg" width="300" height="50" alt="" />
+			      <legend >Login, Fields marked * are Necessary:</legend> <labelfor="username">*Username:</label>
+			      <input type="text" name="username" id="username" />
+			      <br />
+			      <br />
+			      <label for="password">*Password:</label>
+			      <input type="password" name="password" id="password" />
+			      <br />
+			      <br />
+			      <input type="submit" name="submit" id="submit" value="Login"/>
+			      <br />
+			    </fieldset>
+			  </form>
+			</div>
+		</div>
+	</body>
+</html>
+'''
 
 needed_fields = {
  'user_sync': ('xml_to_sync',), 
