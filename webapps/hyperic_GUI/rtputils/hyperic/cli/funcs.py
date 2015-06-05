@@ -490,7 +490,6 @@ dct = {
   'sync_server_config_file': sync_server_config_file,
   'serverConfig_getConfig': serverConfig_getConfig,
   'serverConfig_setConfig': serverConfig_setConfig,
-
   'user_list': user_list,
   'user_changePassword': user_changePassword,
   'user_sync': user_sync ,

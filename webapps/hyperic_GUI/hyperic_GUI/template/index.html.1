@@ -23,107 +23,27 @@
   //take data from search box and pass it to  server
   //get form back from server and display
   $(document).ready(function() {
-	var data =  [
-	  "ps command server",
-	  "start server",
-	  "stop server",
-	  "restart server",
-	  "dump server",
-	  "status server",
-	  "get server config file",
-	  "sync server config file",
-	  "serverConfig getConfig",
-	  "serverConfig setConfig",
-	  "user list",
-	  "user changePassword",
-	  "user sync",
-	  "user create",
-	  "user delete",
-	  "resource getResourcePrototypes",
-	  "resource getResourcePrototype",
-	  "resource get",
-	  "resource find",
-	  "resource sync",
-	  "resource delete",
-	  "resource move",
-	  "alertdefinition listDefinitions",
-	  "alertdefinition listTypeDefinitions",
-	  "alertdefinition delete",
-	  "metric getTemplates",
-	  "metric syncTemplates",
-	  "metric getMetricTemplate",
-	  "metric getMetrics",
-	  "metric syncMetrics",
-	  "metric getMetric",
-	  "metric getData",
-	  "metric getGroupData",
-	  "metric getResourceData",
-	  "agent get",
-	  "agent ping",
-	  "autodiscovery approve",
-	  "maintenance get",
-	  "maintenance schedule",
-	  "maintenance unschedule",
-	  "escalation get",
-	  "escalation delete",
-	  "group get",
-	  "group list",
-	  "group delete",
-	  "role get",
-	  "role delete",
-	  "alert getLastAlertFixedBy",
-	  "alert find",
-	  "alert findByResource",
-	  "alert ack",
-	  "alert fix",
-	  "alert delete",
-	  "metricData get",
-	  "metricData getLast",
-	  "metricData getMulti",
-	  "metricData getMultiLast",
-	  "event find",
-	  "event findByResource",
-	  "control actions",
-	  "control history",
-	  "control execute",
-	  "application delete",
-	  "sql serverResources",
-	]; 
-	var filter = function (text) {
-		var result = [];
-		for (var i = 0; i < data.length; i++) {
-			if (data[i].indexOf(text) > -1){ 
-				result.push(data[i] + "<br>"); 
-				console.log("added to the result " + data[i]);
-			};
-		};
-		return result;
-	};
-
-	//when a key is pressed
+  //when a key is pressed
   	$('#input').keyup(function(event){
-		if (event.which == 13){
-		       event.preventDefault();
-		       $.ajax({
-			       url: 'applogic',
-			       dataType: 'html',
-			       data: ({'searchValue' : $(this).val()}),
-			       contentType: "application/x-www-form-urlencoded",
-			       context: 'document.body.outputdiv',
-			       async:false,
-			       type:'GET',
-			       success: function(html){
-					 $('form#target').html(html);
-				 },  // success
-			       error: function(data){
-				  $('form#target').html(data);
-			       }, //error 
-		       }); //ajax
-		       } else {
-				var result = filter($(this).val());
-				document.getElementById("target").innerHTML = result.join(" ");
-		       }
-		event.preventDefault();
+     if (event.which == 13){
+       event.preventDefault();
+     }
+       event.preventDefault();
+	       $.ajax({
+	       url: 'applogic',
+	       dataType: 'html',
+	       data: ({'searchValue' : $(this).val()}),
+	       contentType: "application/x-www-form-urlencoded",
+	       context: 'document.body.outputdiv',
+	       async:false,
+	       type:'GET',
+	       success: function(html){
+		  $('form#target').html(html);
+		 },  // success
+	       error: function(data){
+		  $('form#target').html(data);
+	       }, //error 
+	   }); //ajax
       }); //keypress
   });  //end of document
   </script>
@@ -188,7 +108,5 @@
   	<form action="/logout"><input type="submit" name="submit" value="logout" /></form>
   </div>
   <div class="error"></div>
-  <script type="text/javascript" charset="utf-8">
-  </script>
   </body>
 </html>
