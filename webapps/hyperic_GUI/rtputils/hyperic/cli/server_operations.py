@@ -5,22 +5,22 @@ import os
 
 def start_server(global_config):
 	"""docstring for start_server"""
-	return run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh start'" %(global_config["hypericsearch.server_base_path"],))
+	return run("sh %s/bin/hq-server.sh start" %(global_config["hypericsearch.server_base_path"],))
 def stop_server(global_config):
 	"""docstring for stop_server"""
-	return run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh stop'" %(global_config["hypericsearch.server_base_path"],))
+	return run("sh %s/bin/hq-server.sh stop" %(global_config["hypericsearch.server_base_path"],))
 def status_server(global_config):
 	"""docstring for status_server"""
-	return run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh status'" %(global_config["hypericsearch.server_base_path"],))
+	return run("sh %s/bin/hq-server.sh status" %(global_config["hypericsearch.server_base_path"],))
 def restart_server(global_config):
 	"""docstring for restart_server"""
-	return run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh restart'" %(global_config["hypericsearch.server_base_path"],))
+	return run("sh %s/bin/hq-server.sh restart" %(global_config["hypericsearch.server_base_path"],))
 def dump_server(global_config):
 	"""docstring for dump_server"""
-	return run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh dump'" %(global_config["hypericsearch.server_base_path"],))
+	return run("sh %s/bin/hq-server.sh dump" %(global_config["hypericsearch.server_base_path"],))
 def get_server_config_file(global_config):
 	"""docstring for print_server_config_file"""
-	return run("sudo su - hyperic -c 'cat %s/conf/hq-server.conf'" %(global_config["hypericsearch.server_base_path"],))
+	return run("cat %s/conf/hq-server.conf" %(global_config["hypericsearch.server_base_path"],))
 def run(command):
 	"""docstring for run"""
 	print "RUNNING COMMAND .. " 

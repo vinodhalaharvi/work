@@ -29,26 +29,22 @@
        event.preventDefault();
      }
        event.preventDefault();
-       $.ajax({
-       url: 'applogic',
-       dataType: 'html',
-       data: ({'searchValue' : $(this).val()}),
-       contentType: "application/x-www-form-urlencoded",
-       context: 'document.body.outputdiv',
-       async:false,
-       type:'GET',
-       success: function(html){
-          $('form#target').html(html);
-         }, 
-       error: function(data){
-          $('form#target').html(data);
-       },
-       }); //ajax
-  }); //keypress
-  
-  
-
-  
+	       $.ajax({
+	       url: 'applogic',
+	       dataType: 'html',
+	       data: ({'searchValue' : $(this).val()}),
+	       contentType: "application/x-www-form-urlencoded",
+	       context: 'document.body.outputdiv',
+	       async:false,
+	       type:'GET',
+	       success: function(html){
+		  $('form#target').html(html);
+		 },  // success
+	       error: function(data){
+		  $('form#target').html(data);
+	       }, //error 
+	   }); //ajax
+      }); //keypress
   });  //end of document
   </script>
   </head>
@@ -63,11 +59,12 @@
     </div>
 
     <div id="outputdiv" align="center">
+	    <div id="target_table"></div>
 	    <form id="target" ></form><p></p>
 	    <div>
 	      <fieldset id="Hyperic Search">
 		  <legend><strong>Server Response (If any)</strong></legend>
-		  <textarea id="target1" ></textarea>
+		  <textarea id="target_textarea" ></textarea>
 	      </fieldset>
 
 	    </div>
@@ -77,30 +74,32 @@
    //when form is submitted
    //get database and display
   	$('form#target').submit(function(event){
-       $.ajax({
-       	url: 'applogic/',
-       	dataType: 'html',
-       	data: ($(this).serialize()),
-       	contentType: "application/x-www-form-urlencoded",
-       	context: 'document.body.outputdiv',
-       	async:false,
-       	type:'POST',
-       	success: function(data){
-		$('textarea#target1').html(data);
-       	  }, 
-       	error: function(data){
-		$('textarea#target1').html(data);
-       	},
-       	}); //ajax
-       	return false;
+		   $.ajax({
+			    url: 'applogic/',
+			    dataType: 'html',
+			    data: ($(this).serialize()),
+			    contentType: "application/x-www-form-urlencoded",
+			    context: 'document.body.outputdiv',
+			    async:false,
+			    type:'POST',
+			    success: function(data){
+				    //$('#target_table').html(data);
+				    $('textarea#target_textarea').html(data);
+			      },  //success
+			    error: function(data){
+				    //$('#target_table').html(data);
+				    $('textarea#target_textarea').html(data);
+			    }, //error
+		    }); //ajax
+		    return false;
   	}); //submit
     
    </script>
    
    <script type="text/javascript">
-   $('#button').click(function(){
-    $("#table").dataTable()
-  }); 
+	    //	$('#button').click(function(){
+	    //	    $("#table").dataTable()
+	    //	  }); 
    </script>
   <br />
   <br />

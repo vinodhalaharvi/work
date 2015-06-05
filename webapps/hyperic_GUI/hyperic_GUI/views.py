@@ -1,9 +1,4 @@
 #!/usr/bin/python
-#===============================================================================
-# Script provided by Vinod Halaharvi ( vinod.halaharvi@rtpnet.net, vinod.halaharvi@gmail.com )
-# RTP Network Services, Inc. / 904-236-6993 ( http://www.rtpnet.net )
-# DESCRIPTION: 
-#===============================================================================
 import  sys
 from rtputils.hyperic.cli.funcs import *
 from django.shortcuts import render_to_response

@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/s2687/work/webapps/hyperic_GUI/hyperic_GUI/hyperic_GUI.db',                      # Or path to database file if using sqlite3.
+        'NAME': '/opt/local/software/hyperic/utils/work/webapps/hyperic_GUI/hyperic_GUI/hyperic_GUI.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -46,7 +46,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = '/home/s2687/work/webapps/hyperic_GUI/hyperic_GUI/template/resources/'
+MEDIA_ROOT = '/opt/local/software/hyperic/utils/work/webapps/hyperic_GUI/hyperic_GUI/template/resources/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -107,7 +107,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/s2687/work/webapps/hyperic_GUI/hyperic_GUI/template',
+    '/opt/local/software/hyperic/utils/work/webapps/hyperic_GUI/hyperic_GUI/template',
 )
 
 INSTALLED_APPS = (

@@ -1,23 +1,19 @@
 #!/usr/bin/python
-#===============================================================================
-# Script provided by Vinod Halaharvi ( vinod.halaharvi@rtpnet.net, vinod.halaharvi@gmail.com )
-# RTP Network Services, Inc. / 904-236-6993 ( http://www.rtpnet.net )
-# DESCRIPTION: Fuctions are invoked, each function first check if the 
-#	input param "data" has a value if no then it  returns for "data request" 
-# 	if data is provide then the right action is invoked passing this "data" to that function
-# 	and the return value ( along with content type) is passed back to the web user. 
-#===============================================================================
+# Author: Vinod Halaharvi
+# Phone: (904) 200 1070
 import  sys
 import re
-#from rtputils.hyperic.cli.htmlmap import *
 from htmlmap import *
-import json
 import xml.dom.minidom
 import sys
 import subprocess
 import shlex
 import os
 
+#STEPS 
+#Change the dct dictionary in this file below
+#Add the corresponding function
+#Add new function htmlmap.py  file
 
 def run(command):
 	"""docstring for run"""
@@ -31,12 +27,13 @@ def run(command):
 	return child_stdout_and_stderr
 
 
-def rest(controller='user', action='list', data={}, type='get', app="hqapi1"):
+def rest(controller='user', action='list', data={}, type='get', app="hqapi1", outputparsing=True):
     import urllib
     import urllib2
     import base64
     import re
     url = "http://localhost:7080/hqu/%s/%s/%s.hqu?" % ( app, controller, action)
+    print url
     print 
     print url
     print
@@ -54,6 +51,8 @@ def rest(controller='user', action='list', data={}, type='get', app="hqapi1"):
         url=url,
         data=urllib.urlencode(data),
         headers={"Authorization": "Basic %s" % base64.encodestring('%s:%s' % (os.environ["hyperic_username"], os.environ["hyperic_password"])).replace('\n', '')})).read()
+	if not outputparsing:
+	  return xmlString
 	return xml.dom.minidom.parseString(xmlString).toprettyxml()
     elif type == 'post':
 	print data
@@ -77,46 +76,70 @@ def start_server(data):
 	"""docstring for start_server"""
 	if not data:
 		return ("text/html", htmlmapper('start_server'))
-	data =  run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh start'" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	data =  run("sh %s/bin/hq-server.sh start" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
 	return ("text/html", data)
+
+def ps_command_server(data):
+	"""docstring for ps_command_server"""
+	if not data:
+		return ("text/html", htmlmapper('ps_command_server'))
+	return ("text/html", run("ps -ef").read())
 
 def stop_server(data):
 	"""docstring for stop_server"""
 	if not data:
 		return ("text/html", htmlmapper('stop_server'))
-	data =  run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh stop'" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	data =  run("sh %s/bin/hq-server.sh stop" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
 	return ("text/html", data)
 
 def status_server(data):
 	"""docstring for status_server"""
 	if not data:
 		return ("text/html", htmlmapper('status_server'))
-	data =  run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh status'" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	data =  run("sh %s/bin/hq-server.sh status" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
 	return ("text/html", data)
 
 def restart_server(data):
 	"""docstring for restart_server"""
 	if not data:
 		return ("text/html", htmlmapper('restart_server'))
-	data =  run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh restart'" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	data =  run("sh %s/bin/hq-server.sh restart" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
 	return ("text/html", data)
 
 def dump_server(data):
 	"""docstring for dump_server"""
 	if not data:
 		return ("text/html", htmlmapper('dump_server'))
-	data =  run("sudo su - hyperic -c 'sh %s/bin/hq-server.sh dump'" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	data =  run("sh %s/bin/hq-server.sh dump" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
 	return ("text/html", data)
 
 def get_server_config_file(data):
 	"""docstring for print_server_config_file"""
 	if not data:
 		return ("text/html", htmlmapper('get_server_config_file'))
-	data = run("sudo su - hyperic -c 'cat %s/conf/hq-server.conf'" %("/opt/local/software/hyperic/server-5.7.1-EE")).read()
+	data = run("cat %s/conf/hq-server.conf" %("/opt/local/software/hyperic/server-5.7.1-EE")).read()
 	return ("text/html", data)
+
+def sync_server_config_file(data):
+	"""docstring for print_server_config_file"""
+	if not data:
+		return ("text/html", htmlmapper('sync_server_config_file'))
+	config_string = data['xml_to_sync']
+	config_file = "%s/conf/hq-server.conf" % ("/opt/local/software/hyperic/server-5.7.1-EE", )
+	print config_file
+	print config_string
+	try:
+	    fd = open(config_file, 'w')
+	    fd.write(config_string)
+	except:
+	    return ("text/html", "Error: COULD NOT WRITE TO FILE .. " )
+	finally: 
+	    fd.close()
+	return ("text/html", "Write successful!!")
 
 def user_list(data):
   return ("application/html", "<p></p><textarea style=\"width:100%\">" + rest('user', 'list', data) + "</textarea>")
+
 
 def user_changePassword(data):
   if not data:
@@ -193,6 +216,18 @@ def metric_getTemplates(data):
   if not data:
     return ("text/html", htmlmapper('metric_getTemplates'))
   return ("application/xml", rest('metric', 'getTemplates', data))
+
+
+def serverConfig_getConfig(data):
+    if not data:
+	    return ("text/html", htmlmapper('serverConfig_getConfig'))
+    return ("text/html", '%s' % rest('serverConfig', 'getConfig'))
+
+
+def serverConfig_setConfig(data):
+  if not data:
+    return ("text/html", htmlmapper('serverConfig_setConfig'))
+  return ("text/html", '%s' % rest('serverConfig', 'setConfig', data['xml_to_sync'], 'post'))
 
 def metric_syncTemplates(data):
   if not data:
@@ -387,7 +422,8 @@ def application_delete(data):
 def sql_serverResources(data):
   if not data:
     return ("text/html", htmlmapper('sql_serverResources'))
-  return ("application/javascript", '<script type="text/javascript">$("table").dataTable();</script>' + "".join(re.findall('".*?".*"(.*)"', rest('query', 'runQuery', {'query':'serverResources'}, 'get', 'query'))).replace('\\',''))
+  return ("application/javascript",  rest('query', 'runQuery', {'query':'platformAgentInventory'}, 'get', 'query', outputparsing=False))
+  #return ("application/javascript", '<script type="text/javascript">$("table").dataTable();</script>' + "".join(re.findall('".*?".*"(.*)"', rest('query', 'runQuery', {'query':'platformAgentInventory'}, 'get', 'query', outputparsing=False))).replace('\\',''))
   
   
 #change func.py, add a new function, add dictionary mapping
@@ -404,7 +440,7 @@ def check_dict(_string=None):
   if dct.has_key(dashes(_string)):
     return ('callfunction', dct[dashes(_string)])
   else:
-    return ('justoutput', '<div align="center">' + '<br />'.join([spaces(key) for key in dct.keys() if re.match(".*%s.*" % dashes(_string), key)])+ '</div>') 
+    return ('justoutput', '<div align="center" id="commands">' + '<br />'.join([spaces(key) for key in dct.keys() if re.match(".*%s.*" % dashes(_string), key)])+ '</div>') 
 
 def todict(datastring):
   try:
@@ -444,12 +480,16 @@ def html(_string):
 
 
 dct = {
+  'ps_command_server': ps_command_server,
   'start_server': start_server,
   'stop_server': stop_server,
   'restart_server': restart_server,
   'dump_server': dump_server,
   'status_server': status_server,
   'get_server_config_file': get_server_config_file,
+  'sync_server_config_file': sync_server_config_file,
+  'serverConfig_getConfig': serverConfig_getConfig,
+  'serverConfig_setConfig': serverConfig_setConfig,
 
   'user_list': user_list,
   'user_changePassword': user_changePassword,

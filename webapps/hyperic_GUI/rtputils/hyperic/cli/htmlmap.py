@@ -25,6 +25,19 @@ htmlmap = {
 	    </form>
     </div>
     '''
+    , 'ps_command_server': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="ps_command_server" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
     , 'status_server': r'''
     <div class="form" align="center">
 	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
@@ -71,6 +84,22 @@ htmlmap = {
 			    <input type="hidden" name="hidden" value="hidden" />
 			    <input type="hidden" name="actionName" value="get_server_config_file" />
 			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'sync_server_config_file': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="sync_server_config_file" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <label for="xml_to_sync">xml_to_sync*:</label>
+			    <textarea cols="100" rows="30" name="xml_to_sync" id="xml_to_sync">$data</textarea>
+			    <br />
 			    <input type="submit" name="submit" id="submit" />
 			    <br />
 		    </fieldset>
@@ -143,6 +172,33 @@ htmlmap = {
       <legend>Fields marked * are Necessary:</legend>
       <label for="name">name*:</label>
       <input type="text" name="name" id="name" />
+      <br />
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>'''
+ , 'serverConfig_getConfig': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="serverConfig_getConfig" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+   '''
+  , 'serverConfig_setConfig': r'''<div class="form" align="center">
+  <form id="target" action="false" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden"/>
+      <input type="hidden" name="actionName" value="serverConfig_setConfig" />
+      <legend>Fields marked * are Necessary:</legend>
+      <label for="xml_to_sync">xml_to_sync*:</label>
+      <textarea cols="100" rows="30" name="xml_to_sync" id="xml_to_sync">$data</textarea>
       <br />
       <input type="submit" name="submit" id="submit" />
       <br />
