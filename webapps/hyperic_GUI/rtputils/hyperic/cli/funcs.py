@@ -86,7 +86,10 @@ def start_server(data):
 	"""docstring for start_server"""
 	if not data:
 		return ("text/html", htmlmapper('start_server'))
-	data =  run("sh %s/bin/hq-server.sh start" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	command_string = "sh $hyperic_base_directory/bin/hq-server.sh start"
+	config = read_hyperic_search_config()
+	command = string.Template(command_string).safe_substitute(config)
+	data =  run(command).read()
 	return ("text/html", data)
 
 def read_hyperic_search_config():
@@ -96,7 +99,7 @@ def read_hyperic_search_config():
 	configfile = "/opt/local/software/hyperic/utils/work/webapps/hyperic_GUI/hyperic_GUI.conf"
 	with open(configfile) as file:
 		for line in file.readlines():
-			if not line:
+			if not line.strip():
 				continue
 			line = line.strip()
 			if not line.startswith("#"):
@@ -216,35 +219,48 @@ def stop_server(data):
 	"""docstring for stop_server"""
 	if not data:
 		return ("text/html", htmlmapper('stop_server'))
-	data =  run("sh %s/bin/hq-server.sh stop" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	command_string = "sh $hyperic_base_directory/bin/hq-server.sh stop"
+	config = read_hyperic_search_config()
+	command = string.Template(command_string).safe_substitute(config)
+	data =  run(command).read()
 	return ("text/html", data)
 
 def status_server(data):
 	"""docstring for status_server"""
 	if not data:
 		return ("text/html", htmlmapper('status_server'))
-	data =  run("sh %s/bin/hq-server.sh status" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	command_string = "sh $hyperic_base_directory/bin/hq-server.sh status"
+	config = read_hyperic_search_config()
+	command = string.Template(command_string).safe_substitute(config)
+	data =  run(command).read()
 	return ("text/html", data)
 
 def restart_server(data):
 	"""docstring for restart_server"""
 	if not data:
 		return ("text/html", htmlmapper('restart_server'))
-	data =  run("sh %s/bin/hq-server.sh restart" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	command_string = "sh $hyperic_base_directory/bin/hq-server.sh restart"
+	config = read_hyperic_search_config()
+	command = string.Template(command_string).safe_substitute(config)
+	data =  run(command).read()
 	return ("text/html", data)
 
 def dump_server(data):
 	"""docstring for dump_server"""
 	if not data:
 		return ("text/html", htmlmapper('dump_server'))
-	data =  run("sh %s/bin/hq-server.sh dump" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
+	command_string = "sh $hyperic_base_directory/bin/hq-server.sh dump"
+	config = read_hyperic_search_config()
+	command = string.Template(command_string).safe_substitute(config)
+	data =  run(command).read()
 	return ("text/html", data)
 
 def get_server_config_file(data):
 	"""docstring for print_server_config_file"""
 	if not data:
 		return ("text/html", htmlmapper('get_server_config_file'))
-	data = run("cat %s/conf/hq-server.conf" %("/opt/local/software/hyperic/server-5.7.1-EE")).read()
+	config = read_hyperic_search_config()
+	data = run("cat %s/conf/hq-server.conf" %(config["hyperic_base_directory"])).read()
 	return ("text/html", data)
 
 def sync_server_config_file(data):
@@ -252,7 +268,8 @@ def sync_server_config_file(data):
 	if not data:
 		return ("text/html", htmlmapper('sync_server_config_file'))
 	config_string = data['xml_to_sync']
-	config_file = "%s/conf/hq-server.conf" % ("/opt/local/software/hyperic/server-5.7.1-EE", )
+	config = read_hyperic_search_config()
+	config_file = "%s/conf/hq-server.conf" % (config["hyperic_base_directory"], )
 	print config_file
 	print config_string
 	try:
