@@ -9,6 +9,7 @@ import sys
 import subprocess
 import shlex
 import os
+import string
 
 #STEPS 
 #Change the dct dictionary in this file below
@@ -25,6 +26,15 @@ def run(command):
 				env=os.environ)
 	(child_stdin, child_stdout_and_stderr) = (p.stdin, p.stdout)
 	return child_stdout_and_stderr
+
+def run_background(command):
+	"""docstring for run"""
+	print "RUNNING COMMAND IN THE BACKGROUND.. " 
+	print command
+	subprocess.Popen(shlex.split(command), 
+			stdout=subprocess.PIPE, stderr=subprocess.STDOUT, 
+			close_fds=True, env=os.environ)
+	return
 
 
 def rest(controller='user', action='list', data={}, type='get', app="hqapi1", outputparsing=True):
@@ -78,6 +88,123 @@ def start_server(data):
 		return ("text/html", htmlmapper('start_server'))
 	data =  run("sh %s/bin/hq-server.sh start" %("/opt/local/software/hyperic/server-5.7.1-EE", )).read()
 	return ("text/html", data)
+
+def read_hyperic_search_config():
+	"""docstring for read_hyperic_search_config"""
+	print "Reading config file .."
+	config = {}
+	configfile = "/opt/local/software/hyperic/utils/work/webapps/hyperic_GUI/hyperic_GUI.conf"
+	with open(configfile) as file:
+		for line in file.readlines():
+			if not line:
+				continue
+			line = line.strip()
+			if not line.startswith("#"):
+				key, value = line.split("=")
+				config.update({key: value})
+	print "Config file read successfully .. " 
+	print "Here are the contents of the config file .. " 
+	print config
+	return config
+	pass
+
+
+def pg_status_databases_postgres(data):
+    	r""" 
+	ssh authorized_keys have to be setup 
+	for this to work 
+	"""
+	msg = ""
+	config = read_hyperic_search_config()
+	if not data:
+		return ("text/html", htmlmapper('pg_status_databases_postgres'))
+	command_string = "ssh $postgres_linux_user@$postgres_linux_hostname '$postgres_client_bin/pg_ctl -D $postgres_data_home -l $postgres_data_home/logfile status'"
+	command = string.Template(command_string).safe_substitute(config)
+	command = string.Template(command).safe_substitute(data)
+	msg += command
+	msg += run(command).read()
+	return ("text/html", msg)
+
+def pg_start_databases_postgres(data):
+    	r""" 
+	ssh authorized_keys have to be setup 
+	for this to work 
+	"""
+	msg = ""
+	config = read_hyperic_search_config()
+	if not data:
+		return ("text/html", htmlmapper('pg_start_databases_postgres'))
+	command_string = "ssh $postgres_linux_user@$postgres_linux_hostname '$postgres_client_bin/pg_ctl -D $postgres_data_home -l $postgres_data_home/logfile -m fast start'"
+	command = string.Template(command_string).safe_substitute(config)
+	command = string.Template(command).safe_substitute(data)
+	msg += command
+	msg += run(command).read()
+	return ("text/html", msg)
+
+def pg_stop_databases_postgres(data):
+    	r""" 
+	ssh authorized_keys have to be setup 
+	for this to work 
+	"""
+	msg = ""
+	config = read_hyperic_search_config()
+	if not data:
+		return ("text/html", htmlmapper('pg_stop_databases_postgres'))
+	command_string = "ssh $postgres_linux_user@$postgres_linux_hostname '$postgres_client_bin/pg_ctl -D $postgres_data_home -l $postgres_data_home/logfile -m fast stop'"
+	command = string.Template(command_string).safe_substitute(config)
+	command = string.Template(command).safe_substitute(data)
+	msg += command
+	msg += run(command).read()
+	return ("text/html", msg)
+
+def pg_copy_databases_postgres(data):
+    	r""" 
+	ssh authorized_keys have to be setup 
+	for this to work 
+	"""
+	msg = ""
+	config = read_hyperic_search_config()
+	if not data:
+		return ("text/html", htmlmapper('pg_copy_databases_postgres'))
+	copy_command_string = "create database $postgres_to_db with template $postgres_from_db owner $postgres_db_owner;"
+	command_string = "ssh $postgres_linux_user@$postgres_linux_hostname '$postgres_client_bin/psql -v -d postgres -h $postgres_db_hostname -p $postgres_port -U $postgres_db_user -c \"%s\"'"  % (copy_command_string, )
+	command = string.Template(command_string).safe_substitute(config)
+	command = string.Template(command).safe_substitute(data)
+	msg += command
+	msg += run(command).read()
+	return ("text/html", msg)
+
+def pg_list_databases_postgres(data):
+    	r""" 
+	ssh authorized_keys have to be setup 
+	for this to work 
+	"""
+	msg = ""
+	config = read_hyperic_search_config()
+	if not data:
+		return ("text/html", htmlmapper('pg_list_databases_postgres'))
+	command_string = "ssh $postgres_linux_user@$postgres_linux_hostname '$postgres_client_bin/psql -v postgres -h $postgres_db_hostname -p $postgres_port -U $postgres_db_user --list'\n"
+	command = string.Template(command_string).safe_substitute(config)
+	command = string.Template(command).safe_substitute(data)
+	msg += command
+	msg += run(command).read()
+	return ("text/html", msg)
+
+def pg_dump_postgres(data):
+    	r""" 
+	ssh authorized_keys have to be setup 
+	for this to work 
+	"""
+	msg = ""
+	config = read_hyperic_search_config()
+	if not data:
+		return ("text/html", htmlmapper('pg_dump_postgres'))
+	command_string = "ssh $postgres_linux_user@$postgres_linux_hostname '$postgres_client_bin/pg_dump -v -h $postgres_db_hostname -p $postgres_port -U $postgres_db_user -i -Fc $postgres_db > $postgres_data_home/$postgres_db.dump'\n"
+	command = string.Template(command_string).safe_substitute(config)
+	command = string.Template(command).safe_substitute(data)
+	msg += command
+	msg += run(command).read()
+	return ("text/html", msg)
 
 def ps_command_server(data):
 	"""docstring for ps_command_server"""
@@ -481,6 +608,12 @@ def html(_string):
 
 dct = {
   'ps_command_server': ps_command_server,
+  'pg_list_databases_postgres': pg_list_databases_postgres,
+  'pg_copy_databases_postgres': pg_copy_databases_postgres,
+  'pg_start_databases_postgres': pg_start_databases_postgres,
+  'pg_status_databases_postgres': pg_status_databases_postgres,
+  'pg_stop_databases_postgres': pg_stop_databases_postgres,
+  'pg_dump_postgres': pg_dump_postgres,
   'start_server': start_server,
   'stop_server': stop_server,
   'restart_server': restart_server,

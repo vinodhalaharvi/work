@@ -2,13 +2,17 @@ def zencoder(dct, action=""):
   str = ""
   keylabel = ""
   str += ".form[align='center']>form[action='/cgi-bin/hyperic-cli.py' method='POST' align='center']>fieldset[align='right' style='width: 40%;']>input[type=hidden name=hidden value=hidden]+input[type=hidden name=actionName value=" + action + "]+legend{Fields marked * are Necessary:}+"
+  value = None
   for key, values in dct.items():
-    flag, type = values
+    try:
+	    flag, type = values
+    except:
+	    flag, type, value = values
     if flag == 'True':
       keylabel = key + '*'
     else:
       keylabel = key
-    str += "(label[for='%s']{%s:}+input[type='%s'name='%s'id='%s']+br)+" % (key, keylabel, type, key, key)
+    str += "(label[for='%s']{%s:}+input[type='%s'name='%s'id='%s'value='%s']+br)+" % (key, keylabel, type, key, key, value)
   str += r"+input[type='submit'name='submit'id='submit']+br"
   return str
 
@@ -19,8 +23,26 @@ def zen_generator(_tuple):
   print zencoder(dct, _string)
   print "'''"
 
-
 dct_list = [
+('pg_copy_databases_postgres',
+{
+  'postgres_to_db' : ('True', 'text'),
+  'postgres_from_db' : ('True', 'text'),
+  'postgres_db_owner' : ('True', 'text', '*******'),
+  'postgres_db_password' : ('True', 'text', '*******'),
+}),
+('pg_dump_postgres',
+{
+  'postgres_linux_user' : ('True', 'text', 'postgres'),
+  'postgres_linux_hostname' : ('True', 'text', 'lnx20761'),
+  'postgres_port' : ('True', 'text', '5432'),
+  'postgres_client_bin' : ('True', 'text', '/usr/pgsql-9.1/bin'),
+  'postgres_data_home' : ('True', 'text', '/opt/local/software/hyperic/postgresdb/data'),
+  'postgres_db_hostname' : ('True', 'text', 'lnx20761'),
+  'postgres_db_user' : ('True', 'text', 'hqadmin'),
+  'postgres_db_password' : ('True', 'text', '*******'),
+  'postgres_db' : ('True', 'text', 'HQ'),
+}),
 ('stop_server',
 {}),
 ('start_server',

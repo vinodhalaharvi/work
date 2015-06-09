@@ -12,6 +12,105 @@ htmlmap = {
 	    </form>
     </div>
     '''
+    , 'pg_status_databases_postgres': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="pg_status_databases_postgres" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'pg_start_databases_postgres': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="pg_start_databases_postgres" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'pg_stop_databases_postgres': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="pg_stop_databases_postgres" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'pg_copy_databases_postgres': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="pg_copy_databases_postgres" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <label for="postgres_from_db">postgres_from_db*:</label>
+			    <input type="text" name="postgres_from_db" id="postgres_from_db"/>
+			    <br />
+			    <label for="postgres_to_db">postgres_to_db*:</label>
+			    <input type="text" name="postgres_to_db" id="postgres_to_db"/>
+			    <br />
+			    <label for="postgres_db_owner">postgres_db_owner*:</label>
+			    <input type="text" name="postgres_db_owner" id="postgres_db_owner"/>
+			    <br />
+			    <label for="postgres_db_password">postgres_db_password*:</label>
+			    <input type="password" name="postgres_db_password" id="postgres_db_password" value="*******" />
+			    <br />
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'pg_list_databases_postgres': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="pg_list_databases_postgres" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <label for="postgres_db_password">postgres_db_password*:</label>
+			    <input type="password" name="postgres_db_password" id="postgres_db_password"/>
+			    <br />
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'pg_dump_postgres': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="pg_dump_postgres" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <label for="postgres_db_password">postgres_db_password*:</label>
+			    <input type="password" name="postgres_db_password" id="postgres_db_password"/>
+			    <br />
+			    <label for="postgres_db">postgres_db*:</label>
+			    <input type="text" name="postgres_db" id="postgres_db" value="HQ" />
+			    <br />
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
     , 'start_server': r'''
     <div class="form" align="center">
 	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
