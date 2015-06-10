@@ -124,6 +124,19 @@ htmlmap = {
 	    </form>
     </div>
     '''
+    , 'tail_server_log_file': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="tail_server_log_file" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
     , 'ps_command_server': r'''
     <div class="form" align="center">
 	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
@@ -395,6 +408,34 @@ htmlmap = {
     </fieldset>
   </form>
   </div>''',
+  'group_sync': r'''<div class="form" align="center">
+  <form id="target" action="false" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden"/>
+      <input type="hidden" name="actionName" value="group_sync" />
+      <legend>Fields marked * are Necessary:</legend>
+      <label for="xml_to_sync">xml_to_sync*:</label>
+      <textarea style="width: 50%; height: 50%;" name="xml_to_sync" id="xml_to_sync">$data</textarea>
+      <br />
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>''',
+  'role_sync': r'''<div class="form" align="center">
+  <form id="target" action="false" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden"/>
+      <input type="hidden" name="actionName" value="role_sync" />
+      <legend>Fields marked * are Necessary:</legend>
+      <label for="xml_to_sync">xml_to_sync*:</label>
+      <textarea style="width: 50%; height: 50%;" name="xml_to_sync" id="xml_to_sync">$data</textarea>
+      <br />
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>''',
   'resource_sync': r'''<div class="form" align="center">
   <form id="target" action="false" method="POST" align="center">
     <fieldset align="right" style="width: 40%;">
@@ -813,6 +854,58 @@ htmlmap = {
       <label for="id">id*:</label>
       <input type="text" name="id" id="id" />
       <br />
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>
+'''
+, 'role_list': r'''
+<div class="form" align="center">
+  <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden" />
+      <input type="hidden" name="actionName" value="role_list" />
+      <legend>Fields marked * are Necessary:</legend>
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>
+'''
+, 'escalation_list': r'''
+<div class="form" align="center">
+  <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden" />
+      <input type="hidden" name="actionName" value="escalation_list" />
+      <legend>Fields marked * are Necessary:</legend>
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>
+'''
+, 'application_list': r'''
+<div class="form" align="center">
+  <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden" />
+      <input type="hidden" name="actionName" value="application_list" />
+      <legend>Fields marked * are Necessary:</legend>
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>
+'''
+, 'agent_list': r'''
+<div class="form" align="center">
+  <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden" />
+      <input type="hidden" name="actionName" value="agent_list" />
+      <legend>Fields marked * are Necessary:</legend>
       <input type="submit" name="submit" id="submit" />
       <br />
     </fieldset>
@@ -1409,6 +1502,8 @@ loginstr= r'''
 needed_fields = {
  'user_sync': ('xml_to_sync',), 
  'resource_sync': ('xml_to_sync',), 
+ 'group_sync': ('xml_to_sync',), 
+ 'role_sync': ('xml_to_sync',), 
 }
 
 def needed(_string):

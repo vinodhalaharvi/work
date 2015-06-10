@@ -215,6 +215,13 @@ def ps_command_server(data):
 		return ("text/html", htmlmapper('ps_command_server'))
 	return ("text/html", run("ps -ef").read())
 
+def tail_server_log_file(data):
+	"""docstring for tail_server_log_file"""
+	config = read_hyperic_search_config()
+	if not data:
+		return ("text/html", htmlmapper('tail_server_log_file'))
+	return ("text/html", run("tail -1000 %s" % config["hyperic_base_directory"] + "/logs/server.log").read())
+
 def stop_server(data):
 	"""docstring for stop_server"""
 	if not data:
@@ -331,6 +338,16 @@ def resource_sync(data):
     return ("text/html", htmlmapper('resource_sync'))
   return ("text/html" , '<textarea name="" id="" cols="20" rows="10"><strong>%s</strong></textarea>' % rest('resource', 'sync', data['xml_to_sync'], 'post'))
 
+def group_sync(data):
+  if not data:
+    return ("text/html", htmlmapper('group_sync'))
+  return ("text/html" , '<textarea name="" id="" cols="20" rows="10"><strong>%s</strong></textarea>' % rest('group', 'sync', data['xml_to_sync'], 'post'))
+
+def role_sync(data):
+  if not data:
+    return ("text/html", htmlmapper('role_sync'))
+  return ("text/html" , '<textarea name="" id="" cols="20" rows="10"><strong>%s</strong></textarea>' % rest('role', 'sync', data['xml_to_sync'], 'post'))
+
 def resource_delete(data):
   if not data:
     return ("text/html", htmlmapper('resource_delete'))
@@ -423,6 +440,26 @@ def agent_ping(data):
   if not data:
     return ("text/html", htmlmapper('agent_ping'))
   return ("application/xml", rest('agent', 'ping', data))
+
+def agent_list(data):
+  if not data:
+    return ("text/html", htmlmapper('agent_list'))
+  return ("application/xml", rest('agent', 'list', data))
+
+def role_list(data):
+  if not data:
+    return ("text/html", htmlmapper('role_list'))
+  return ("application/xml", rest('role', 'list', data))
+
+def application_list(data):
+  if not data:
+    return ("text/html", htmlmapper('application_list'))
+  return ("application/xml", rest('application', 'list', data))
+
+def escalation_list(data):
+  if not data:
+    return ("text/html", htmlmapper('escalation_list'))
+  return ("application/xml", rest('escalation', 'list', data))
 
 
 def autodiscovery_approve(data):
@@ -625,6 +662,7 @@ def html(_string):
 
 dct = {
   'ps_command_server': ps_command_server,
+  'tail_server_log_file': tail_server_log_file,
   'pg_list_databases_postgres': pg_list_databases_postgres,
   'pg_copy_databases_postgres': pg_copy_databases_postgres,
   'pg_start_databases_postgres': pg_start_databases_postgres,
@@ -650,6 +688,8 @@ dct = {
   'resource_get': resource_get,
   'resource_find': resource_find,
   'resource_sync': resource_sync,
+  'role_sync': role_sync,
+  'group_sync': group_sync,
   'resource_delete': resource_delete,
   'resource_move': resource_move, 
   'alertdefinition_listDefinitions':alertdefinition_listDefinitions,
@@ -666,10 +706,14 @@ dct = {
   'metric_getResourceData':metric_getResourceData,
   'agent_get':agent_get,
   'agent_ping':agent_ping,
+  'agent_list':agent_list,
+  'role_list':role_list,
   'autodiscovery_approve':autodiscovery_approve,
   'maintenance_get':maintenance_get,
   'maintenance_schedule':maintenance_schedule,
   'maintenance_unschedule':maintenance_unschedule,
+  'application_list': application_list,
+  'escalation_list': escalation_list,
   'escalation_get': escalation_get,
   'escalation_delete': escalation_delete,
   'group_get': group_get,

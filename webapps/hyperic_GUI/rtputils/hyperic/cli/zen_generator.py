@@ -24,6 +24,9 @@ def zen_generator(_tuple):
   print "'''"
 
 dct_list = [
+('tail_server_log_file',
+{
+}),
 ('pg_copy_databases_postgres',
 {
   'postgres_to_db' : ('True', 'text'),
