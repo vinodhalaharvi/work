@@ -25,8 +25,6 @@
   $(document).ready(function() {
 	var data =  [
 	  "ps command server",
-	  "alertmigrator export",
-	  "alertmigrator import",
 	  "tail server log file",
 	  "pg list databases postgres",
 	  "pg copy databases postgres",
@@ -104,7 +102,7 @@
 	  "application delete",
 	  "sql serverResources",
 	]; 
-	var filter = function (text) {
+	var filter = function (data, text) {
 		var result = [];
 		for (var i = 0; i < data.length; i++) {
 			if (data[i].indexOf(text) > -1){ 
@@ -114,6 +112,13 @@
 		};
 		return result;
 	};
+
+  	$('#filter_text').keyup(function(event){
+		event.preventDefault();
+		var result = filter(document.getElementById("target_textarea").textContent.split("\n"), $(this).val());
+		console.log(document.getElementById("target_textarea").textContent.split("\n"));
+		document.getElementById("target_textarea").textContent = result.join(" ");
+	}); //keypress
 
 	//when a key is pressed
   	$('#input').keyup(function(event){
@@ -135,7 +140,7 @@
 			       }, //error 
 		       }); //ajax
 		       } else {
-				var result = filter($(this).val());
+				var result = filter(data, $(this).val());
 				document.getElementById("target").innerHTML = result.join(" ");
 		       }
 		event.preventDefault();
@@ -160,6 +165,8 @@
 	    <div>
 	      <fieldset id="Hyperic Search">
 		  <legend><strong>Server Response (If any)</strong></legend>
+		  <input type="text" name="filter" value="Filter" id="filter_text">
+		  <br>
 		  <textarea id="target_textarea" ></textarea>
 	      </fieldset>
 

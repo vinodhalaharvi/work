@@ -137,6 +137,38 @@ htmlmap = {
 	    </form>
     </div>
     '''
+    , 'alertmigrator_export': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="alertmigrator_export" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <label for="xml_to_sync">xml_to_sync*:</label>
+			    <textarea cols="100" rows="30" name="xml_to_sync" id="xml_to_sync"></textarea>
+			    <br />
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'alertmigrator_import': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="alertmigrator_import" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <label for="xml_to_sync">xml_to_sync*:</label>
+			    <textarea cols="100" rows="30" name="xml_to_sync" id="xml_to_sync"></textarea>
+			    <br />
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
     , 'ps_command_server': r'''
     <div class="form" align="center">
 	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
@@ -1481,7 +1513,8 @@ loginstr= r'''
 			  <form action="" method="POST">
 			    <fieldset align="center">
 			      <img src="resources/media/images/Hyperic_Search.jpg" width="300" height="50" alt="" />
-			      <legend >Login, Fields marked * are Necessary:</legend> <labelfor="username">*Username:</label>
+			      <legend >Login, Fields marked * are Necessary:</legend> 
+			      <labelfor="username">*Username:</label>
 			      <input type="text" name="username" id="username" />
 			      <br />
 			      <br />

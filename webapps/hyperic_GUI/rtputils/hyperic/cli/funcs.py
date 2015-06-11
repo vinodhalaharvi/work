@@ -333,6 +333,18 @@ def resource_find(data):
   return ("application/xml", rest('resource', 'get', data))
     
 
+def alertmigrator_export(data):
+  if not data:
+    return ("text/html", htmlmapper('alertmigrator_export'))
+  if not data["xml_to_sync"]:
+    return ("text/html" , '%s' % "You must enter the XML config file contents in the above box..")
+
+def alertmigrator_import(data):
+  if not data:
+    return ("text/html", htmlmapper('alertmigrator_import'))
+  if not data["xml_to_sync"]:
+    return ("text/html" , '%s' % "You must enter the XML config file contents in the above box..")
+
 def resource_sync(data):
   if not data:
     return ("text/html", htmlmapper('resource_sync'))
@@ -661,6 +673,8 @@ def html(_string):
 
 
 dct = {
+  'alertmigrator_export': alertmigrator_export,
+  'alertmigrator_import': alertmigrator_import,
   'ps_command_server': ps_command_server,
   'tail_server_log_file': tail_server_log_file,
   'pg_list_databases_postgres': pg_list_databases_postgres,
