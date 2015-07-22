@@ -18,6 +18,9 @@ import string
 
 def run(command):
 	"""docstring for run"""
+	not_safe = (";", "&", "rm", "mv", "less",  )
+	for string in not_safe:
+		assert string not in command
 	print "RUNNING COMMAND .. " 
 	print command
 	p = subprocess.Popen(shlex.split(command), 
@@ -42,7 +45,12 @@ def rest(controller='user', action='list', data={}, type='get', app="hqapi1", ou
     import urllib2
     import base64
     import re
-    url = "http://localhost:7080/hqu/%s/%s/%s.hqu?" % ( app, controller, action)
+    config = read_hyperic_search_config()
+    url = "http://$hyperic_server_host:$hyperic_server_port/hqu/%s/%s/%s.hqu?" 
+    assert "hyperic_server_host" in config
+    assert "hyperic_server_port" in config
+    temp = string.Template(url).safe_substitute(config)
+    url = temp % ( app, controller, action)
     print url
     print 
     print url
@@ -82,6 +90,25 @@ def cgiFieldStorageToDict( fieldStorage):
       params[ key ] = fieldStorage[ key ].value
    return params
         
+def df_server(data):
+	"""docstring for df_server"""
+	if not data:
+		return ("text/html", htmlmapper('df_server'))
+	command = "df -h"
+	data =  run(command).read()
+	return ("text/html", data)
+
+def dig_server(data):
+	"""docstring for dig_server"""
+	if not data:
+		return ("text/html", htmlmapper('dig_server'))
+	if data["ip"] and not data["hostname"]:
+		command = "dig -x %s" % (data["ip"])
+	else:
+		command = "dig %s" % (data["hostname"])
+	data =  run(command).read()
+	return ("text/html", data)
+
 def start_server(data):
 	"""docstring for start_server"""
 	if not data:
@@ -214,6 +241,98 @@ def ps_command_server(data):
 	if not data:
 		return ("text/html", htmlmapper('ps_command_server'))
 	return ("text/html", run("ps -ef").read())
+
+
+
+import sys
+# Author Vinod Halaharvi
+
+def get_IPV4_network_addresses(network, hosts=True, othernetwork=None, verbose=False):
+	"""docstring for get_IPV4_network_addresses"""
+	from ipaddress import *
+	import ipaddress
+	result = []
+	if verbose:
+		for attr in ("version",
+			"max_prefixlen",
+			"is_multicast",
+			"is_private",
+			"is_unspecified",
+			"is_reserved",
+			"is_loopback",
+			"is_link_local",
+			"network_address",
+			"broadcast_address",
+			"hostmask",
+			"with_prefixlen",
+			"compressed",
+			"exploded",
+			"with_netmask",
+			"with_hostmask",
+			"num_addresses",
+			"prefixlen",):
+			result +=  ["%s: %s\n" % (attr, getattr(network, attr))]
+	if len(list(network.hosts())) > 65000: 
+		result = "too many hosts to display .. Keep search lower than 66,000 hosts" 
+		return result 
+	if hosts:
+		result += ["\n"]
+		result += ["Hosts:"]
+		result += ["\n"]
+		result += [str(host) + "\n" for host in network.hosts()]
+	return result
+def summarize_ip_address_range(data):
+	"""docstring for summarize_ip_address_range"""
+	import traceback
+	if not data:
+		return ("text/html", htmlmapper('summarize_ip_address_range'))
+	assert "first" in data
+	assert "last" in data
+	import ipaddress
+	try:
+		result =  [ipaddr for ipaddr in ipaddress.summarize_address_range(
+				ipaddress.IPv4Address(data["first"]),
+				ipaddress.IPv4Address(data["last"]))]
+		result = (str(e) + "\n" for e in result)
+		return ("text/html", result)
+	except Exception, e:
+		return ("text/html",  str(e) + "\n" + str(sys.exc_info()))
+
+def ip_network(data):
+	"""docstring for ip_network"""
+	if not data:
+		return ("text/html", htmlmapper('ip_network'))
+	from ipaddress import ip_network
+	result = []
+	try:
+		if "verbose" in data and data["verbose"] == "true" or data["verbose"] == "True":
+			result = get_IPV4_network_addresses(ip_network(data["network"]), verbose=True)	
+		else:
+			result = get_IPV4_network_addresses(ip_network(data["network"]), verbose=False)	
+		return ("text/html", result)
+	except Exception, e:
+		return ("text/html", str(e))
+
+def vmstat_server(data):
+	"""docstring for vmstat_server"""
+	if not data:
+		return ("text/html", htmlmapper('vmstat_server'))
+	return ("text/html", run("vmstat -a").read())
+def lsof_server(data):
+	"""docstring for lsof_server"""
+	if not data:
+		return ("text/html", htmlmapper('lsof_server'))
+	return ("text/html", run("lsof").read())
+def netstat_server(data):
+	"""docstring for netstat_server"""
+	if not data:
+		return ("text/html", htmlmapper('netstat_server'))
+	return ("text/html", run("netstat -atunlp").read())
+def iostat_server(data):
+	"""docstring for iostat_server"""
+	if not data:
+		return ("text/html", htmlmapper('iostat_server'))
+	return ("text/html", run("iostat").read())
 
 def tail_server_log_file(data):
 	"""docstring for tail_server_log_file"""
@@ -473,6 +592,11 @@ def escalation_list(data):
     return ("text/html", htmlmapper('escalation_list'))
   return ("application/xml", rest('escalation', 'list', data))
 
+def escalation_sync(data):
+  if not data:
+    return ("text/html", htmlmapper('escalation_sync'))
+  return ("text/html" , '<textarea name="" id="" cols="20" rows="10"><strong>%s</strong></textarea>' % rest('escalation', 'sync', data['xml_to_sync'], 'post'))
+
 
 def autodiscovery_approve(data):
   if not data:
@@ -676,6 +800,12 @@ dct = {
   'alertmigrator_export': alertmigrator_export,
   'alertmigrator_import': alertmigrator_import,
   'ps_command_server': ps_command_server,
+  'ip_network': ip_network,
+  'summarize_ip_address_range': summarize_ip_address_range,
+  'vmstat_server': vmstat_server,
+  'lsof_server': lsof_server,
+  'netstat_server': netstat_server,
+  'iostat_server': iostat_server,
   'tail_server_log_file': tail_server_log_file,
   'pg_list_databases_postgres': pg_list_databases_postgres,
   'pg_copy_databases_postgres': pg_copy_databases_postgres,
@@ -684,6 +814,8 @@ dct = {
   'pg_stop_databases_postgres': pg_stop_databases_postgres,
   'pg_dump_postgres': pg_dump_postgres,
   'start_server': start_server,
+  'df_server': df_server,
+  'dig_server': dig_server,
   'stop_server': stop_server,
   'restart_server': restart_server,
   'dump_server': dump_server,
@@ -728,6 +860,7 @@ dct = {
   'maintenance_unschedule':maintenance_unschedule,
   'application_list': application_list,
   'escalation_list': escalation_list,
+  'escalation_sync': escalation_sync,
   'escalation_get': escalation_get,
   'escalation_delete': escalation_delete,
   'group_get': group_get,

@@ -169,12 +169,102 @@ htmlmap = {
 	    </form>
     </div>
     '''
+    , 'ip_network': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="ip_network" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <label for="verbose">verbose:</label>
+			    <input type="text" name="verbose" id="verbose" />
+			    <br>
+			    <label for="network">network:</label>
+			    <input type="text" name="network" id="network" />
+			    <br>
+			    <input type="submit" name="submit" id="submit"  />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'summarize_ip_address_range': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="summarize_ip_address_range" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <label for="first">first:</label>
+			    <input type="text" name="first" id="first" />
+			    <br>
+			    <label for="last">last:</label>
+			    <input type="text" name="last" id="last" />
+			    <br>
+			    <input type="submit" name="submit" id="submit"  />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
     , 'ps_command_server': r'''
     <div class="form" align="center">
 	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
 		    <fieldset align="right" style="width: 40%;">
 			    <input type="hidden" name="hidden" value="hidden" />
 			    <input type="hidden" name="actionName" value="ps_command_server" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'vmstat_server': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="vmstat_server" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'lsof_server': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="lsof_server" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'netstat_server': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="netstat_server" />
+			    <legend>Fields marked * are Necessary:</legend>
+			    <input type="submit" name="submit" id="submit" />
+			    <br />
+		    </fieldset>
+	    </form>
+    </div>
+    '''
+    , 'iostat_server': r'''
+    <div class="form" align="center">
+	    <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+		    <fieldset align="right" style="width: 40%;">
+			    <input type="hidden" name="hidden" value="hidden" />
+			    <input type="hidden" name="actionName" value="iostat_server" />
 			    <legend>Fields marked * are Necessary:</legend>
 			    <input type="submit" name="submit" id="submit" />
 			    <br />
@@ -445,6 +535,20 @@ htmlmap = {
     <fieldset align="right" style="width: 40%;">
       <input type="hidden" name="hidden" value="hidden"/>
       <input type="hidden" name="actionName" value="group_sync" />
+      <legend>Fields marked * are Necessary:</legend>
+      <label for="xml_to_sync">xml_to_sync*:</label>
+      <textarea style="width: 50%; height: 50%;" name="xml_to_sync" id="xml_to_sync">$data</textarea>
+      <br />
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>''',
+  'escalation_sync': r'''<div class="form" align="center">
+  <form id="target" action="false" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden"/>
+      <input type="hidden" name="actionName" value="escalation_sync" />
       <legend>Fields marked * are Necessary:</legend>
       <label for="xml_to_sync">xml_to_sync*:</label>
       <textarea style="width: 50%; height: 50%;" name="xml_to_sync" id="xml_to_sync">$data</textarea>
@@ -938,6 +1042,39 @@ htmlmap = {
       <input type="hidden" name="hidden" value="hidden" />
       <input type="hidden" name="actionName" value="agent_list" />
       <legend>Fields marked * are Necessary:</legend>
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>
+'''
+, 'df_server': r'''
+<div class="form" align="center">
+  <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden" />
+      <input type="hidden" name="actionName" value="df_server" />
+      <legend>Fields marked * are Necessary:</legend>
+      <input type="submit" name="submit" id="submit" />
+      <br />
+    </fieldset>
+  </form>
+</div>
+'''
+, 'dig_server': r'''
+<div class="form" align="center">
+  <form action="/cgi-bin/hyperic-cli.py" method="POST" align="center">
+    <fieldset align="right" style="width: 40%;">
+      <input type="hidden" name="hidden" value="hidden" />
+      <input type="hidden" name="actionName" value="dig_server" />
+      <legend>Fields marked * are Necessary:</legend>
+      <p>If you give both hostname and ip, then  forward lookup is given a preference</p>
+      <label for="ip">ip:</label>
+      <input type="text" name="ip" id="ip" />
+      <br />
+      <label for="hostname">hostname:</label>
+      <input type="text" name="hostname" id="hostname" />
+      <br />
       <input type="submit" name="submit" id="submit" />
       <br />
     </fieldset>

@@ -1,0 +1,20 @@
+<hq>
+	<config>
+                <source>
+			<enum key="hq_host" value="localhost"></enum>
+                        <enum key="hq_port" value="7081"></enum>
+                        <enum key="hq_username" value="hqadmin"></enum>
+			<enum key="hq_password" value="hqadmin"></enum>
+			<enum key="alertscriptpath" value="/opt/local/software/hyperic/alertlog/alert.sh"></enum>
+			<enum key="clearscriptpath" value="/opt/local/software/hyperic/alertlog/alertrecover.sh"></enum>
+                </source>
+                <target>
+                        <enum key="hq_host" value="localhost"></enum>
+                        <enum key="hq_port" value="7081"></enum>
+                        <enum key="hq_username" value="hqadmin"></enum>
+                        <enum key="hq_password" value="hqadmin"></enum>
+                        <enum key="alertscriptpath" value="/opt/local/software/hyperic/alertlog/alert.sh"></enum>
+                        <enum key="clearscriptpath" value="/opt/local/software/hyperic/alertlog/alertrecover.sh"></enum>
+                </target>
+	</config>
+</hq>

@@ -9,10 +9,10 @@ all:
 
 
 export:
-	python copyXml.pyc 0 $(configfile) $(sourceplat) "" 
+	python copyXml.py 0 $(configfile) $(sourceplat) "" 
 
 import:
-	python copyXml.pyc 1 $(configfile) $(sourceplat) $(targetplat)
+	python copyXml.py 1 $(configfile) $(sourceplat) $(targetplat)
 
 cleandata:
 	rm  -f data/*.xml

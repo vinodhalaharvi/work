@@ -41,10 +41,14 @@ def getXML(url, hyperic_username, hyperic_password):
 	return xml.dom.minidom.parseString(data).toprettyxml()
 
 
-def getResourceXML(what, resourceId, verbose=False):
+def getResourceXML(what, resourceId, children=False, verbose=False):
 	"""docstring for getResourceXML"""
-	if verbose:
+	if verbose and children:
 		url = r"http://%s:%s/hqu/hqapi1/resource/get.hqu?id=%s&children=true&verbose=true" % (gc.config[what]['hq_host'], gc.config[what]['hq_port'], resourceId)
+	elif verbose and not children:
+		url = r"http://%s:%s/hqu/hqapi1/resource/get.hqu?id=%s&verbose=true" % (gc.config[what]['hq_host'], gc.config[what]['hq_port'], resourceId)
+	elif children and not verbose:
+		url = r"http://%s:%s/hqu/hqapi1/resource/get.hqu?id=%s&children=true" % (gc.config[what]['hq_host'],gc.config[what]['hq_port'], resourceId)
 	else:
 		url = r"http://%s:%s/hqu/hqapi1/resource/get.hqu?id=%s" % (gc.config[what]['hq_host'],gc.config[what]['hq_port'], resourceId)
 	return getXML(url, gc.config[what]['hq_username'], gc.config[what]['hq_password'])
@@ -88,7 +92,7 @@ def getResourceId(what, plat):
 	root = etree.fromstring(xmlstring)
 	return root.xpath('//Resource')[0].attrib['id']
 
-def get_Resource_and_Alerts(what, plat, resourcefilepath, alertdeffilepath, verbose=False):
+def get_Resource_and_Alerts(what, plat, resourcefilepath, alertdeffilepath, children=True, verbose=False):
 	#Get source_resource resources and alertdefs
 	resId = None
 	if resourcefilepath and os.path.isfile(resourcefilepath):
@@ -99,7 +103,7 @@ def get_Resource_and_Alerts(what, plat, resourcefilepath, alertdeffilepath, verb
 					.xpath('//ResourceResponse/Resource')[0].attrib['id']
 	else:
 		resId = getResourceId(what, plat)
-		res_string = getResourceXML(what, resId, verbose)
+		res_string = getResourceXML(what, resId, children, verbose)
 	resource = etree.fromstring(res_string)
 	if alertdeffilepath and os.path.isfile(alertdeffilepath):
 		with open(alertdeffilepath) as f:
@@ -350,7 +354,8 @@ if __name__ == '__main__':
 			gc.sourceplat, \
 			"data/source_resources_%s.xml" % (gc.sourceplat, ), \
 			"data/source_alertdefs_%s.xml" % (gc.sourceplat, ), \
-				True)
+			True, 
+			False)
 	source_resource_copy = deepcopy(source_resource)
 
 	#Get source_resource resources and alertdefs
@@ -369,6 +374,7 @@ if __name__ == '__main__':
 			gc.targetplat, \
 			"", \
 			"",  \
+			True, 
 			False)
 
 	with open("data/target_resources_%s.xml" % gc.targetplat, 'w') as f:
@@ -436,7 +442,7 @@ if __name__ == '__main__':
 
 	# and get the targetly synced resources in the sync_target files
 	resId = getResourceId('target', gc.targetplat)
-	trgt_refresh_res_string = getResourceXML('target', resId, True)
+	trgt_refresh_res_string = getResourceXML('target', resId, True, False)
 	refresh_target_resource = etree.fromstring(trgt_refresh_res_string)
 	with open('data/.target_refresh_resources_%s.xml' % gc.targetplat, 'w') as f:
 		f.write(trgt_refresh_res_string)

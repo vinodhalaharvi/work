@@ -1,0 +1,165 @@
+<ResourcesResponse>
+	<Status>Success</Status>
+	<Resource description="Red Hat Enterprise Linux 5" id="11168" instanceId="" location="" name="lnx40014.csxt.csx.com" typeId="1">
+		<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux ProcessServer" typeId="2">
+			<ResourcePrototype id="10012" instanceId="10003" name="ProcessServer" resourceTypeId="2"/>
+			<ResourceInfo key="installPath" value="/"/>
+			<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux ProcessServer"/>
+		</Resource>
+		<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Net Services" typeId="2">
+			<ResourcePrototype id="10215" instanceId="10037" name="Net Services" resourceTypeId="2"/>
+			<ResourceInfo key="installPath" value="/"/>
+			<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Net Services"/>
+		</Resource>
+		<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux FileServer" typeId="2">
+			<ResourcePrototype id="10011" instanceId="10002" name="FileServer" resourceTypeId="2"/>
+			<ResourceInfo key="installPath" value="/"/>
+			<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux FileServer"/>
+		</Resource>
+		<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux NetworkServer" typeId="2">
+			<ResourcePrototype id="10013" instanceId="10004" name="NetworkServer" resourceTypeId="2"/>
+			<ResourceInfo key="installPath" value="/"/>
+			<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux NetworkServer"/>
+		</Resource>
+		<ResourcePrototype id="10001" instanceId="10001" name="Linux" resourceTypeId="1"/>
+		<Agent address="10.101.33.215" id="10001" port="2144" unidirectional="false" version="4.5.2"/>
+		<Ip address="10.101.33.215" mac="00:50:56:AB:50:13" netmask="255.255.240.0"/>
+		<Ip address="10.92.122.103" mac="00:50:56:AB:00:29" netmask="255.255.248.0"/>
+		<Ip address="127.0.0.1" mac="00:00:00:00:00:00" netmask="255.0.0.0"/>
+		<ResourceInfo key="fqdn" value="lnx40014.csxt.csx.com"/>
+	<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Sendmail 8.x" typeId="2">
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Sendmail 8.x Message Submission Process" typeId="3">
+				<ResourcePrototype id="10479" instanceId="10380" name="Sendmail 8.x Message Submission Process" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Sendmail 8.x Message Submission Process"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Sendmail 8.x Root Daemon Process" typeId="3">
+				<ResourcePrototype id="10480" instanceId="10381" name="Sendmail 8.x Root Daemon Process" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Sendmail 8.x Root Daemon Process"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Sendmail 8.x SMTP" typeId="3">
+				<ResourcePrototype id="10481" instanceId="10382" name="Sendmail 8.x SMTP" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Sendmail 8.x SMTP"/>
+			</Resource>
+			<ResourcePrototype id="10478" instanceId="10078" name="Sendmail 8.x" resourceTypeId="2"/>
+			<ResourceInfo key="installPath" value="/usr/sbin/sendmail"/>
+			<ResourceInfo key="autoIdentifier" value="sendmail"/>
+		</Resource>
+		<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux ProcessServer" typeId="2">
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux CPU 1 (2261Mhz Intel Xeon)" typeId="3">
+				<ResourcePrototype id="10020" instanceId="10007" name="CPU" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux CPU 1 (2261Mhz Intel Xeon)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux CPU 2 (2261Mhz Intel Xeon)" typeId="3">
+				<ResourcePrototype id="10020" instanceId="10007" name="CPU" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux CPU 2 (2261Mhz Intel Xeon)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux sshd Process" typeId="3">
+				<ResourcePrototype id="10017" instanceId="10004" name="Process" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux sshd Process"/>
+			</Resource>
+			<ResourcePrototype id="10012" instanceId="10003" name="ProcessServer" resourceTypeId="2"/>
+			<ResourceInfo key="installPath" value="/"/>
+			<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux ProcessServer"/>
+		</Resource>
+		<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Net Services" typeId="2">
+			<Resource description="Local mount point: /home/s2056" id="" instanceId="" location="" name="lnx40014.csxt.csx.com NFS mount vcsopshome:/export/home01d/s2056" typeId="3">
+				<ResourcePrototype id="10221" instanceId="10163" name="RPC" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com NFS mount vcsopshome:/export/home01d/s2056"/>
+			</Resource>
+			<Resource description="Local mount point: /home/s2687" id="" instanceId="" location="" name="lnx40014.csxt.csx.com NFS mount vcsopshome:/export/home01d/s2687" typeId="3">
+				<ResourcePrototype id="10221" instanceId="10163" name="RPC" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com NFS mount vcsopshome:/export/home01d/s2687"/>
+			</Resource>
+			<Resource description="Local mount point: /opt/CSXsudo/etc" id="" instanceId="" location="" name="lnx40014.csxt.csx.com NFS mount vcssudo:/opt/CSXsudo/etc" typeId="3">
+				<ResourcePrototype id="10221" instanceId="10163" name="RPC" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com NFS mount vcssudo:/opt/CSXsudo/etc"/>
+			</Resource>
+			<ResourcePrototype id="10215" instanceId="10037" name="Net Services" resourceTypeId="2"/>
+			<ResourceInfo key="installPath" value="/"/>
+			<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Net Services"/>
+		</Resource>
+		<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux NetworkServer" typeId="2">
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux Network Interface lo (loopback)" typeId="3">
+				<ResourcePrototype id="10014" instanceId="10001" name="NetworkServer Interface" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux Network Interface lo (loopback)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux Network Interface eth0 (ethernet)" typeId="3">
+				<ResourcePrototype id="10014" instanceId="10001" name="NetworkServer Interface" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux Network Interface eth0 (ethernet)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux Network Interface eth1 (ethernet)" typeId="3">
+				<ResourcePrototype id="10014" instanceId="10001" name="NetworkServer Interface" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux Network Interface eth1 (ethernet)"/>
+			</Resource>
+			<ResourcePrototype id="10013" instanceId="10004" name="NetworkServer" resourceTypeId="2"/>
+			<ResourceInfo key="installPath" value="/"/>
+			<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux NetworkServer"/>
+		</Resource>
+		<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux FileServer" typeId="2">
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-root mounted on / (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-root mounted on / (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-home mounted on /export/home (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-home mounted on /export/home (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-var mounted on /var (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-var mounted on /var (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-tmp mounted on /tmp (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-tmp mounted on /tmp (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-usr mounted on /usr (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-usr mounted on /usr (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-openv mounted on /usr/openv (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-openv mounted on /usr/openv (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-opt mounted on /opt (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-opt mounted on /opt (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-BGS mounted on /opt/local/software/BGS (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-BGS mounted on /opt/local/software/BGS (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-CA mounted on /opt/CA (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/rootvg-CA mounted on /opt/CA (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/appvg-data mounted on /opt/local/data (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/appvg-data mounted on /opt/local/data (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/appvg-ionix mounted on /opt/local/software/ionix (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/appvg-ionix mounted on /opt/local/software/ionix (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/sda1 mounted on /boot (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/sda1 mounted on /boot (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/appvg-hyperic mounted on /opt/emc/hyperic (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/appvg-hyperic mounted on /opt/emc/hyperic (local/ext3)"/>
+			</Resource>
+			<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com Linux File System /dev/mapper/appvg-ionix2 mounted on /opt/emc/IONIX (local/ext3)" typeId="3">
+				<ResourcePrototype id="10019" instanceId="10006" name="FileServer Mount" resourceTypeId="3"/>
+				<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux File System /dev/mapper/appvg-ionix2 mounted on /opt/emc/IONIX (local/ext3)"/>
+			</Resource>
+			<ResourcePrototype id="10011" instanceId="10002" name="FileServer" resourceTypeId="2"/>
+			<ResourceInfo key="installPath" value="/"/>
+			<ResourceInfo key="autoIdentifier" value="lnx40014.csxt.csx.com Linux FileServer"/>
+		</Resource>
+		<Resource description="" id="" instanceId="" location="" name="lnx40014.csxt.csx.com NTP 4.x" typeId="2">
+			<ResourcePrototype id="10298" instanceId="10059" name="NTP 4.x" resourceTypeId="2"/>
+			<ResourceInfo key="installPath" value="/usr/sbin/ntpd"/>
+			<ResourceInfo key="autoIdentifier" value="/usr/sbin/ntpd"/>
+		</Resource>
+		</Resource>
+</ResourcesResponse>

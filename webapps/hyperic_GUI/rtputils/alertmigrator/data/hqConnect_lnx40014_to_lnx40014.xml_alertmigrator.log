@@ -1,0 +1,65 @@
+1434383753.06
+Adding Servers ..
+Following Servers found .. 
+Adding Services ..
+Filtering out some problem sync servers .. 
+Target sync resource string is .. 
+
+1434384907.62
+Adding Servers ..
+Following Servers found .. 
+Adding Services ..
+Filtering out some problem sync servers .. 
+Deleting .. {'typeId': '2', 'description': 'Hyperic HQ monitor Agent', 'instanceId': '10008', 'location': '', 'id': '11176', 'name': 'lnx40014.csxt.csx.com HQ Agent 4.5.2'}Target sync resource string is .. 
+
+1434384986.86
+Adding Servers ..
+Following Servers found .. 
+lnx40012.csxt.csx.com Sendmail 8.x
+lnx40012.csxt.csx.com Linux ProcessServer
+lnx40012.csxt.csx.com Net Services
+lnx40012.csxt.csx.com HQ Agent 4.5.2
+lnx40012.csxt.csx.com Linux NetworkServer
+lnx40012.csxt.csx.com Linux FileServer
+lnx40012.csxt.csx.com NTP 4.x
+Adding Services ..
+Filtering out some problem sync servers .. 
+Deleting .. {'typeId': '2', 'description': 'Hyperic HQ monitor Agent', 'instanceId': '10008', 'location': '', 'id': '11176', 'name': 'lnx40014.csxt.csx.com HQ Agent 4.5.2'}Deleting .. {'typeId': '2', 'description': 'Hyperic HQ monitor Agent', 'instanceId': '10014', 'location': '', 'id': '11722', 'name': 'lnx40012.csxt.csx.com HQ Agent 4.5.2'}Target sync resource string is .. 
+
+1434385050.32
+Adding Servers ..
+Following Servers found .. 
+lnx40012.csxt.csx.com Sendmail 8.x
+lnx40012.csxt.csx.com Linux ProcessServer
+lnx40012.csxt.csx.com Net Services
+lnx40012.csxt.csx.com HQ Agent 4.5.2
+lnx40012.csxt.csx.com Linux NetworkServer
+lnx40012.csxt.csx.com Linux FileServer
+lnx40012.csxt.csx.com NTP 4.x
+Adding Services ..
+Filtering out some problem sync servers .. 
+Deleting .. {'typeId': '2', 'description': 'Hyperic HQ monitor Agent', 'instanceId': '10008', 'location': '', 'id': '11176', 'name': 'lnx40014.csxt.csx.com HQ Agent 4.5.2'}Deleting .. {'typeId': '2', 'description': 'Hyperic HQ monitor Agent', 'instanceId': '10014', 'location': '', 'id': '11722', 'name': 'lnx40012.csxt.csx.com HQ Agent 4.5.2'}Target sync resource string is .. 
+
+Copying ..(11168, 11168)
+Copying .. (lnx40014.csxt.csx.com, lnx40014.csxt.csx.com)
+
+Copying ..(11171, 11171)
+Copying .. (lnx40014.csxt.csx.com Linux ProcessServer, lnx40014.csxt.csx.com Linux ProcessServer)
+
+Copying ..(11172, 11172)
+Copying .. (lnx40014.csxt.csx.com Net Services, lnx40014.csxt.csx.com Net Services)
+
+Copying ..(11174, 11174)
+Copying .. (lnx40014.csxt.csx.com Linux FileServer, lnx40014.csxt.csx.com Linux FileServer)
+
+Copying ..(11177, 11177)
+Copying .. (lnx40014.csxt.csx.com Linux NetworkServer, lnx40014.csxt.csx.com Linux NetworkServer)
+
+Adding Alerts ..
+0 New alerts will have to be copied from source to target ..Please run the command as shown below to copy the alerts .. 
+Writing target_resource alert definition to the 			file: data/target_alertdefs_lnx40014.csxt.csx.com.xml
+
+
+
+
+
